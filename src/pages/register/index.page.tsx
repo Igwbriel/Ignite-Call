@@ -10,9 +10,9 @@ import { useEffect } from 'react'
 const registerFormSchema = z.object({
   username: z
     .string()
-    .min(3, { message: 'Úsuario deve conter no mínimo 3 letras' })
+    .min(3, { message: 'Usuário deve conter no mínimo 3 letras' })
     .regex(/^([a-z\\-]+)$/i, {
-      message: 'Úsuario deve conter somente letras e hifens',
+      message: 'Usuário deve conter somente letras e hifens',
     })
     .transform((username) => username.toLowerCase()),
   name: z.string().min(3, { message: 'O nome deve conter no mínimo 3 letras' }),
@@ -54,7 +54,7 @@ export default function Register() {
       </Header>
       <Form as="form" onSubmit={handleSubmit(handleRegister)}>
         <label>
-          <Text size="sm">Nome de úsuario</Text>
+          <Text size="sm">Nome de usuário</Text>
           <TextInput
             prefix="ignite.com/"
             placeholder="seu-usuario"
