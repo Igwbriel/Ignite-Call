@@ -8,7 +8,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 const claimUsernameFormSchema = z.object({
   username: z
     .string()
-    .min(3, { message: 'Úsuario deve conter pelo menos 3 letras' })
+    .min(3, { message: 'Úsuario deve conter no mínimo 3 letras' })
     .regex(/^([a-z\\-]+)$/i, {
       message: 'Úsuario deve conter somente letras e hifens',
     })
