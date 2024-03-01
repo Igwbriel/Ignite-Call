@@ -1,4 +1,7 @@
+import dayjs from 'dayjs'
 import { CaretLeft, CaretRight } from 'phosphor-react'
+import { useMemo, useState } from 'react'
+import { getWeekDays } from '../../utils/get-week-days'
 import {
   CalendarActions,
   CalendarBody,
@@ -7,9 +10,6 @@ import {
   CalendarHeader,
   CalendarTittle,
 } from './styles'
-import { getWeekDays } from '../../utils/get-week-days'
-import { useMemo, useState } from 'react'
-import dayjs from 'dayjs'
 
 interface CalendarWeek {
   week: number
@@ -19,28 +19,28 @@ interface CalendarWeek {
   }>
 }
 
-type calendarWeeks = CalendarWeek[]
+type CalendarWeeks = CalendarWeek[]
 
-interface calendarProps {
+interface CalendarProps {
   selectedDate: Date | null
   onDateSelected: (date: Date) => void
 }
 
-export function Calendar({ selectedDate, onDateSelected }: calendarProps) {
+export function Calendar({ selectedDate, onDateSelected }: CalendarProps) {
   const [currentDate, setCurrentDate] = useState(() => {
     return dayjs().set('date', 1)
   })
 
   function handlePreviousMonth() {
-    const previousMonthDate = currentDate.subtract(1, 'month')
+    const previousMonth = currentDate.subtract(1, 'month')
 
-    setCurrentDate(previousMonthDate)
+    setCurrentDate(previousMonth)
   }
 
-  function handleNextsMonth() {
-    const nextMonthDate = currentDate.add(1, 'month')
+  function handleNextMonth() {
+    const nextMonth = currentDate.add(1, 'month')
 
-    setCurrentDate(nextMonthDate)
+    setCurrentDate(nextMonth)
   }
 
   const shortWeekDays = getWeekDays({ short: true })
@@ -69,7 +69,6 @@ export function Calendar({ selectedDate, onDateSelected }: calendarProps) {
       'date',
       currentDate.daysInMonth(),
     )
-
     const lastWeekDay = lastDayInCurrentMonth.get('day')
 
     const nextMonthFillArray = Array.from({
@@ -90,7 +89,7 @@ export function Calendar({ selectedDate, onDateSelected }: calendarProps) {
       }),
     ]
 
-    const calendarWeeks = calendarDays.reduce<calendarWeeks>(
+    const calendarWeeks = calendarDays.reduce<CalendarWeeks>(
       (weeks, _, i, original) => {
         const isNewWeek = i % 7 === 0
 
@@ -119,10 +118,10 @@ export function Calendar({ selectedDate, onDateSelected }: calendarProps) {
         </CalendarTittle>
 
         <CalendarActions>
-          <button onClick={handlePreviousMonth} title="Mês anterior">
+          <button onClick={handlePreviousMonth} title="Previous month">
             <CaretLeft />
           </button>
-          <button onClick={handleNextsMonth} title="Próximo mês">
+          <button onClick={handleNextMonth} title="Next month">
             <CaretRight />
           </button>
         </CalendarActions>
