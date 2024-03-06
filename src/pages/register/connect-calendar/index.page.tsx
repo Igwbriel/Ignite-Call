@@ -20,8 +20,6 @@ export default function ConnectCalendar() {
     await router.push('/register/time-intervals')
   }
 
-  console.log(session)
-
   return (
     <Container>
       <Header>
