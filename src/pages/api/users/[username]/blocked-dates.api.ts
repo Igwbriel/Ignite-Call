@@ -23,8 +23,6 @@ export default async function handler(
     },
   })
 
-  console.log('user')
-
   if (!user) {
     return res.status(400).json({ message: 'User does not exist.' })
   }
@@ -38,11 +36,19 @@ export default async function handler(
     },
   })
 
-  const blockedWeekDays = [0, 1, 2, 3, 4, 5, 6].filter((weekday) => {
+  const blockedWeekDays = [0, 1, 2, 3, 4, 5, 6].filter((weekDay) => {
     return !availableWeekDays.some(
-      (availableWeekDay) => availableWeekDay.week_day === weekday,
+      (availableWeekDay) => availableWeekDay.week_day === weekDay,
     )
   })
 
-  return res.json({ blockedWeekDays })
+  const blockedDatesRaw = await prisma.$queryRaw`
+    SELECT *
+    FROM schedulings S
+
+    WHERE S.user_id = ${user.id}
+      AND DATE_FORMAT(S.date, "%Y-%m") = ${`${year}-${month}`}
+  `
+
+  return res.json({ blockedWeekDays, blockedDatesRaw })
 }
