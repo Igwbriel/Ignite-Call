@@ -13,7 +13,7 @@ export const CalendarHeader = styled('div', {
   justifyContent: 'space-between',
 })
 
-export const CalendarTittle = styled(Text, {
+export const CalendarTitle = styled(Text, {
   fontWeight: '$medium',
   textTransform: 'capitalize',
 
