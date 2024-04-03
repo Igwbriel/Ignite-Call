@@ -54,7 +54,23 @@ Antes de rodar o projeto, instale suas dependências usando:
 
 ## Passo 4
 
-Tudo pronto, agora basta rodar o projeto usando:
+Você precisa rodar o Prisma para fazer a ponte entre a aplicação e o banco de dados, utilizando o comando:
+
+```bash
+  npx prisma studio
+```
+
+## Passo 5
+
+Quase lá, com o Docker já instalado e rodando, agora você precisa criar o contêiner com as images do banco de dados. É um comando complexo mas é uma tacada só:
+
+```bash
+  docker run --name mysql -e MYSQL_ROOT_PASSWORD=docker -p 3306:3306 mysql:latest
+```
+
+## Passo 6
+
+Tudo pronto, agora basta rodar o projeto utilizando:
 
 ```bash
   npm run dev
@@ -71,5 +87,15 @@ Tudo pronto, agora basta rodar o projeto usando:
         </sub>
       </a>
     </td>
+        <td align="center">
+      <a href="https://github.com/rocketseat-education">
+        <img src="https://avatars.githubusercontent.com/u/69590972?s=200&v=4" width="100px;" alt="Foto Rocketseat no GitHub"/><br>
+        <sub>
+          <b>Rocketseat</b>
+        </sub>
+      </a>
+    </td>
   </tr>
 </table>
+
+
